@@ -17,7 +17,6 @@ opts.secretOrKey = secret;
 
 const jwtStrategy = passport => {
     passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-        console.log(jwt_payload);
         User.findOne({ email: jwt_payload.email }, function(err, user) {
             if (err) {
                 return done(err, false, { message: 'Not permitted action' });

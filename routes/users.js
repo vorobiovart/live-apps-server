@@ -78,9 +78,8 @@ router.post('/login', (req, res) => {
                     } else {
                         // Issue token
                         const payload = { email };
-                        const user = jwt.sign(payload, secret, { expiresIn: '20min'});
-                        res.cookie('user', user)
-                            .redirect('/chat');
+                        const user = jwt.sign(payload, secret, { expiresIn: '20min' });
+                        res.cookie('user', user, { httpOnly: true }).redirect('/dashboard');
                     }
                 });
             }
@@ -88,8 +87,9 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res) => {
-    console.log(req.user);
-    res.json(req.user);
+    console.log('profile -> ' + req.user);
+    const { name, email } = req.user;
+    res.status(200).json({ name, email });
 });
 
 module.exports = router;
