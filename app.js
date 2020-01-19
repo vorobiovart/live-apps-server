@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser');
 
 // routers
 const ioRouter = require('./routes/io');
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/user');
 
 const app = express();
 
@@ -48,18 +48,13 @@ const io = socketio(server);
 
 // Using routes
 app.use('/io', ioRouter(io));
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 
 // config passport to use jwtStrategy
 jwtStrategy(passport);
 
 // init passport
 app.use(passport.initialize());
-
-// TODO: this is for test, remove once not needed
-// app.use('/api/test', (req, res) => {
-//   res.send('test');
-// });
 
 // Connect to Mongo
 mongoose.connect(db, { useUnifiedTopology: true, useNewUrlParser: true })
