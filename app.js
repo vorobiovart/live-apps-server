@@ -48,7 +48,7 @@ const io = socketio(server);
 
 // Using routes
 app.use('/io', ioRouter(io));
-app.use('/user', usersRouter);
+app.use('/api/user', usersRouter);
 
 // config passport to use jwtStrategy
 jwtStrategy(passport);
