@@ -14,3 +14,8 @@ services:
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
+    networks:
+      - authentication_frontend
+networks:
+  authentication_frontend:
+    external: true
