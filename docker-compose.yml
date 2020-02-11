@@ -1,8 +1,8 @@
 version: '3.7'
 
 services:
-  server:
-    container_name: server
+  server-prod:
+    container_name: server-prod
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,10 +12,4 @@ services:
     ports:
       - '5000:5000'
     environment:
-      - NODE_ENV=development
-      - CHOKIDAR_USEPOLLING=true
-    networks:
-      - container_frontend
-networks:
-  container_frontend:
-    external: true
+      - NODE_ENV=production
